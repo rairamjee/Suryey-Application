@@ -67,7 +67,7 @@ function Sidebar() {
                 <div>
                     <h3 className='mb-4 text-slate-900 text-2xl mt-8 font-bold'>Forms Created</h3>
                 </div>
-                <div className='flex justify-start ml-8'><Allforms /></div>
+                <div className='flex justify-start ml-8'><CreateForm/></div>
             </div>
         </div>
     );

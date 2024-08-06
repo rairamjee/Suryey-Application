@@ -1,3 +1,4 @@
+"use client"
 import { useState } from 'react';
 import { CirclePlus, ClipboardList } from 'lucide-react';
 import {
