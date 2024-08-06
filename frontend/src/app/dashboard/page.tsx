@@ -1,12 +1,8 @@
-import Sidebar from '../components/sidebar';
+function Dashboard(){
+    return(
+        <div className="flex">
+        </div>
+    )
+}
 
-const DashboardPage = () => {
-  return (
-    <div className="flex">
-      <Sidebar />
-      hiiii 
-    </div>
-  );
-};
-
-export default DashboardPage;
+export default Dashboard;
