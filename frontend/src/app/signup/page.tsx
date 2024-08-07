@@ -2,10 +2,13 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import { Designation, Prisma } from '@prisma/client';
 
 const SignupPage = () => {
     const router = useRouter();
-    const [email, setEmail] = useState('');
+    // const []
+    const [name,setName]=useState('');
     const [password, setPassword] = useState('');
     const [userMail, setUserMail] = useState('');
     const [designation, setDesignation] = useState('');
@@ -14,9 +17,19 @@ const SignupPage = () => {
     // Handle form submission
     const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Implement signup logic here (e.g., API call)
-        // On success:
-        router.push('/login'); // Redirect to login page
+        
+        try {
+            const {data:{data,message}}=await axios.post('/api/user',{
+                name,
+                email: userMail ,    
+                password  ,
+                designation
+            })
+
+            router.push('/login');
+        } catch (error) {
+            console.log(error)
+        } // Redirect to login page
     };
 
     return (
@@ -36,8 +49,8 @@ const SignupPage = () => {
                             id="name"
                             type="text"
                             placeholder="Your Name"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             required
                         />
                     </div>
@@ -66,10 +79,15 @@ const SignupPage = () => {
                             onChange={(e) => setDesignation(e.target.value)}
                             required
                         >
-                            <option value="" disabled>Select Designation</option>
+                            {Object.keys(Designation).map((designation) => {
+                                return (
+                                    <option value={designation}>{designation}</option>
+                                )
+                            })}
+                            {/* <option value="" disabled>Select Designation</option>
                             <option value="Software Engineer">Software Engineer</option>
                             <option value="Data Analyst">Data Analyst</option>
-                            <option value="HR">HR</option>
+                            <option value="HR">HR</option> */}
                         </select>
                     </div>
                     <div className="mb-4">

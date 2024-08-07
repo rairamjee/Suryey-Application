@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 const Login = () => {
     // Hardcoded credentials for demonstration; use secure authentication in a real application
@@ -13,8 +14,19 @@ const Login = () => {
     const [error, setError] = useState('');
 
     // Handle form submission
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        try {
+            const { data: { data, message } } = await axios.post('/api/user/login', {
+                email: username,
+                password: userPassword
+            })
+
+            localStorage.setItem('user', JSON.stringify(data))
+            router.push('/dashboard/sidebar')
+        } catch (error) {
+            console.log(error);
+        }
         if (username === usermail && userPassword === password) {
             router.push('/dashboard'); // Redirect on successful login
             setError(''); // Clear any previous errors

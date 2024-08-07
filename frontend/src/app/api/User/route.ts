@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs'
 
 export async function POST(req: Request) {
   const { email, password, name, designation } = await req.json();
+  console.log(email, password, name, designation)
 
   const existingUser = await prisma.user.findUnique({
     where: { email },
@@ -40,6 +41,7 @@ export async function POST(req: Request) {
     })
   }
   catch(error){
+    console.log(error)
     return Response.json({
       message:"Error during user credentials",
       data:null
