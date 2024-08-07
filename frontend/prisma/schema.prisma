@@ -13,36 +13,46 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  userId Int @id @default(autoincrement())
-  userName String 
-  userEmail String @unique
-  userPassword String 
-  userDesignation String @default("USER")
+enum Designation {
+  Software_Engineer
+  Data_Analyst
+  Devops_Engineer
 }
 
-model Survey{
-  surveyId Int @id @default(autoincrement())
-  surveyName String
+enum Roles {
+  User
+  Admin
+}
+
+model User {
+  id          Int         @id @default(autoincrement())
+  name        String
+  email       String      @unique
+  password    String
+  designation Designation @default(Software_Engineer)
+  roles       Roles       @default(User)
+}
+
+model Survey {
+  surveyId          Int        @id @default(autoincrement())
+  surveyName        String
   surveyDescription String
-  startDate DateTime 
-  endDate DateTime
+  startDate         DateTime
+  endDate           DateTime
+  questions         Question[]
 }
 
 enum QuestionType {
   INPUT
   MCQ
-  RATING
   TF
 }
 
-
 model Question {
-  questionId   Int           @id @default(autoincrement())
-  questionName String
-  questionType QuestionType 
+  questionId     Int          @id @default(autoincrement())
+  questionName   String
+  questionType   QuestionType
   questionOption String[]
-  surveyId Int
+  surveyId       Int
+  survey         Survey       @relation(fields: [surveyId], references: [surveyId])
 }
-
-
