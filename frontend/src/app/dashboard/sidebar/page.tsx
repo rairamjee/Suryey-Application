@@ -43,13 +43,11 @@ function Sidebar() {
 
                 </div>
             </div>
-            <div className='ml-[16.6667%] w-screen'>
-
+            <div className='ml-[16.6667%] w-5/6'>
                 <h1 className=" h-16 text-3xl text-slate-900">All Forms</h1>
-
                 <div className="flex justify-between">
                     <div>
-                        <h1 className="py-4 h-4 text-2xl text-blue-950 mb-8"> Welcome Admin <br /><span className="text-lg">List Of Forms Created</span></h1>
+                        <h1 className="py-4 h-4 text-2xl text-blue-950 mb-4"> Welcome Admin</h1>
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger className="py-4 font-bold">Questify!</TooltipTrigger>
@@ -64,10 +62,12 @@ function Sidebar() {
                     </div>
                 </div>
 
-                <div>
+                {/* <div>
                     <h3 className='mb-4 text-slate-900 text-2xl mt-8 font-bold'>Forms Created</h3>
-                </div>
-                <div className='flex justify-start ml-8'><CreateForm/></div>
+                </div> */}
+
+                {/* <div className='flex justify-start ml-8'><Allforms/></div> */}
+                <div className='flex justify-start'><CreateForm/></div>
             </div>
         </div>
     );
