@@ -13,31 +13,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Designation{
+enum Designation {
   Software_Engineer
   Data_Analyst
   Devops_Engineer
 }
 
-enum Roles{
-  User 
+enum Roles {
+  User
   Admin
 }
-model User{
-  id  Int @id @default(autoincrement())
-  name String 
-  email String @unique
-  password String 
+
+model User {
+  id          Int         @id @default(autoincrement())
+  name        String
+  email       String      @unique
+  password    String
   designation Designation @default(Software_Engineer)
-  roles Roles @default(User) 
+  roles       Roles       @default(User)
 }
 
-model Survey{
-  surveyId Int @id @default(autoincrement())
-  surveyName String
+model Survey {
+  surveyId          Int        @id @default(autoincrement())
+  surveyName        String
   surveyDescription String
-  startDate DateTime 
-  endDate DateTime
+  startDate         DateTime
+  endDate           DateTime
+  questions         Question[]
 }
 
 enum QuestionType {
@@ -46,13 +48,11 @@ enum QuestionType {
   TF
 }
 
-
 model Question {
-  questionId   Int           @id @default(autoincrement())
-  questionName String
-  questionType QuestionType 
+  questionId     Int          @id @default(autoincrement())
+  questionName   String
+  questionType   QuestionType
   questionOption String[]
-  surveyId Int
+  surveyId       Int
+  survey         Survey       @relation(fields: [surveyId], references: [surveyId])
 }
-
-

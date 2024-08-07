@@ -1,6 +1,6 @@
-import prisma from "@utils/db";
-import bcrypt from 'bcrypt'
-// import bcrypt from 'crypt';
+import prisma from '@/utils/db';
+import bcrypt from 'bcryptjs'
+
 
 export async function POST(req: Request) {
   const { email, password, name, designation } = await req.json();
