@@ -1,7 +1,10 @@
-
-import { CirclePlus, ClipboardList } from 'lucide-react';
-import Allforms from './allForm/page';
-import CreateForm from './createForms/page';
+"use client";
+import { useState } from 'react';
+import { CirclePlus, ClipboardList, FileText, CheckCircle } from 'lucide-react';
+import AllForms from './allForm/page'; // Adjusted path if needed
+import CreateForm from './createForms/page'; // Adjusted path if needed
+import AvailableForms from './availableForms/page'; // Adjusted path if needed
+// import FilledForms from './filledForms/page'; // Adjusted path if needed
 import {
     Tooltip,
     TooltipContent,
@@ -9,8 +12,10 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-
 function Sidebar() {
+    // Assume this role is fetched or passed as a prop
+    const [role, setRole] = useState<'admin' | 'user'>('user'); // Change this to 'user' for normal users
+    const [activeView, setActiveView] = useState<'all' | 'create' | 'available' | 'filled'>('all');
 
     const today = new Date();
     const formattedDate = today.toLocaleDateString(undefined, {
@@ -28,31 +33,59 @@ function Sidebar() {
                     <h3 className="mt-4 text-xl">Questify!</h3>
                 </div>
                 <div className="px-4 my-6">
-                    <div
-                        className={"flex items-center mb-4 cursor-pointer p-2 rounded-lg hover:bg-slate-700  hover:text-slate-50"}
-                    >
-                        <ClipboardList className="h-4 w-4 mr-8" />
-                        <span>All Forms</span>
-                    </div>
-                    <div
-                        className={"flex items-center mb-4 cursor-pointer p-2 rounded-lg hover:bg-slate-700  hover:text-slate-50"}
-                    >
-                        <CirclePlus className="h-4 w-4 mr-8" />
-                        <span>Create Form</span>
-                    </div>
-
+                    {role === 'admin' ? (
+                        <>
+                            <div
+                                className={`flex items-center mb-4 cursor-pointer p-2 rounded-lg hover:bg-slate-700 hover:text-slate-50 ${activeView === 'all' ? 'bg-slate-700 text-slate-50' : ''}`}
+                                onClick={() => setActiveView('all')}
+                            >
+                                <ClipboardList className="h-4 w-4 mr-8" />
+                                <span>All Forms</span>
+                            </div>
+                            <div
+                                className={`flex items-center mb-4 cursor-pointer p-2 rounded-lg hover:bg-slate-700 hover:text-slate-50 ${activeView === 'create' ? 'bg-slate-700 text-slate-50' : ''}`}
+                                onClick={() => setActiveView('create')}
+                            >
+                                <CirclePlus className="h-4 w-4 mr-8" />
+                                <span>Create Form</span>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div
+                                className={`flex items-center mb-4 cursor-pointer p-2 rounded-lg hover:bg-slate-700 hover:text-slate-50 ${activeView === 'available' ? 'bg-slate-700 text-slate-50' : ''}`}
+                                onClick={() => setActiveView('available')}
+                            >
+                                <FileText className="h-4 w-4 mr-8" />
+                                <span>Available Forms</span>
+                            </div>
+                            <div
+                                className={`flex items-center mb-4 cursor-pointer p-2 rounded-lg hover:bg-slate-700 hover:text-slate-50 ${activeView === 'filled' ? 'bg-slate-700 text-slate-50' : ''}`}
+                                onClick={() => setActiveView('filled')}
+                            >
+                                <CheckCircle className="h-4 w-4 mr-8" />
+                                <span>Filled Forms</span>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
             <div className='ml-[16.6667%] w-5/6'>
-                <h1 className=" h-16 text-3xl text-slate-900">All Forms</h1>
+                <h1 className="h-16 text-3xl text-slate-900">
+                    {role === 'admin' ? (
+                        activeView === 'all' ? 'All Forms' : 'Create Form'
+                    ) : (
+                        activeView === 'available' ? 'Available Forms' : 'Filled Forms'
+                    )}
+                </h1>
                 <div className="flex justify-between">
                     <div>
-                        <h1 className="py-4 h-4 text-2xl text-blue-950 mb-4"> Welcome Admin</h1>
+                        <h1 className="py-4 h-4 text-2xl text-blue-950 mb-4"> Welcome {role === 'admin' ? 'Admin' : 'User'}</h1>
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger className="py-4 font-bold">Questify!</TooltipTrigger>
                                 <TooltipContent>
-                                    <p>Admin</p>
+                                    <p>{role === 'admin' ? 'Admin' : 'User'}</p>
                                 </TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
@@ -62,12 +95,28 @@ function Sidebar() {
                     </div>
                 </div>
 
-                {/* <div>
-                    <h3 className='mb-4 text-slate-900 text-2xl mt-8 font-bold'>Forms Created</h3>
-                </div> */}
-
-                {/* <div className='flex justify-start ml-8'><Allforms/></div> */}
-                <div className='flex justify-start'><CreateForm/></div>
+                {/* Conditional Rendering */}
+                {role === 'admin' ? (
+                    activeView === 'all' ? (
+                        <div className='flex justify-start'>
+                            <AllForms />
+                        </div>
+                    ) : (
+                        <div className='flex justify-start'>
+                            <CreateForm />
+                        </div>
+                    )
+                ) : (
+                    activeView === 'available' ? (
+                        <div className='flex justify-start'>
+                            <AvailableForms />
+                        </div>
+                    ) : (
+                        <div className='flex justify-start'>
+                            {/* <FilledForms /> */}
+                        </div>
+                    )
+                )}
             </div>
         </div>
     );
