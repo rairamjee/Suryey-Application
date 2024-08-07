@@ -4,7 +4,7 @@ import { CirclePlus, ClipboardList, FileText, CheckCircle } from 'lucide-react';
 import AllForms from './allForm/page'; // Adjusted path if needed
 import CreateForm from './createForms/page'; // Adjusted path if needed
 import AvailableForms from './availableForms/page'; // Adjusted path if needed
-// import FilledForms from './filledForms/page'; // Adjusted path if needed
+import Filledforms from './filledForm/page'; // Adjusted path if needed
 import {
     Tooltip,
     TooltipContent,
@@ -113,7 +113,7 @@ function Sidebar() {
                         </div>
                     ) : (
                         <div className='flex justify-start'>
-                            {/* <FilledForms /> */}
+                            <Filledforms />
                         </div>
                     )
                 )}
