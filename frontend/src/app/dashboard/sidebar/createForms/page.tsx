@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import axios from 'axios';
 
 interface Form {
     name: string;
@@ -88,6 +89,25 @@ function CreateForm() {
         }
     };
 
+    const handleSubmitForm = () => {
+        if (forms.length === 0) {
+            setError("No forms available to submit.");
+            return;
+        }
+        try {
+            // const {data:{data,message}}= await axios.post(''),{
+            //     surveyName:
+            // }
+        } catch (error) {
+            
+        }
+        // Handle form submission logic here
+        console.log("Forms submitted:", forms);
+
+        // Optionally clear forms or handle post-submission logic
+        setForms([]);
+    };
+
     return (
         <div className="flex p-8 bg-slate-100 min-h-screen w-full">
             <div className="w-full">
@@ -130,6 +150,10 @@ function CreateForm() {
                         <p>No forms created yet.</p>
                     )}
                 </div>
+
+                {forms.length > 0 && (
+                    <Button onClick={handleSubmitForm} className="mt-8">Submit Form</Button>
+                )}
 
                 <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
                     <DialogContent>
