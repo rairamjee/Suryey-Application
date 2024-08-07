@@ -31,6 +31,7 @@ model User {
   password    String
   designation Designation @default(Software_Engineer)
   roles       Roles       @default(User)
+  Respone     Respone[]
 }
 
 model Survey {
@@ -40,6 +41,7 @@ model Survey {
   startDate         DateTime
   endDate           DateTime
   questions         Question[]
+  Respone           Respone[]
 }
 
 enum QuestionType {
@@ -55,4 +57,18 @@ model Question {
   questionOption String[]
   surveyId       Int
   survey         Survey       @relation(fields: [surveyId], references: [surveyId])
+}
+
+// model Response{
+//   responseId Int @id @default(autoincrement())
+//   surveryId 
+//   userId
+// }
+
+model Respone {
+  id       Int    @id @default(autoincrement())
+  userId   Int
+  surveyId Int
+  surveys  Survey @relation(fields: [surveyId], references: [surveyId])
+  users    User   @relation(fields: [userId], references: [id])
 }
