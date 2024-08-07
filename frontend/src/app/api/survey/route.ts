@@ -12,9 +12,12 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
     const body = await req.json();
-
+    const startDate = new Date();
+    const endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + 7);
+    
     const survey = await prisma.survey.create({
-        data: body
+        data: {...body, endDate}
     })
 
     return Response.json({
