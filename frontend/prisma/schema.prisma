@@ -37,7 +37,7 @@ model Survey {
   surveyId          Int        @id @default(autoincrement())
   surveyName        String
   surveyDescription String
-  startDate         DateTime
+  startDate         DateTime   @default(now())
   endDate           DateTime
   questions         Question[]
 }
