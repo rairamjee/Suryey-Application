@@ -24,7 +24,7 @@ const SignupPage = () => {
             {/* Left side for signup form */}
             <div className="left-side w-full lg:w-1/2 md:w-2/3 h-screen ml-4 md:ml-8 lg:ml-12 xl:ml-16 flex flex-col items-start justify-center text-slate-50 p-8">
                 <h2 className="text-4xl font-bold mb-4">Questify!</h2>
-                <h3 className="mb-24 text-lg">Join us to get started...</h3>
+                <h3 className="mb-8 text-lg">Join us to get started...</h3>
                 <form className="w-full max-w-sm" onSubmit={handleSignup}>
                     <div className="mb-6">
                         <label className="block text-slate-300 text-sm font-bold mb-2" htmlFor="name">

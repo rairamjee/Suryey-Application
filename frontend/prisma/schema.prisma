@@ -13,12 +13,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Designation{
+  Software_Engineer
+  Data_Analyst
+  Devops_Engineer
+}
+
+enum Roles{
+  User 
+  Admin
+}
 model User{
-  userId Int @id @default(autoincrement())
-  userName String 
-  userEmail String @unique
-  userPassword String 
-  userDesignation String @default("USER")
+  id  Int @id @default(autoincrement())
+  name String 
+  email String @unique
+  password String 
+  designation Designation @default(Software_Engineer)
+  roles Roles @default(User) 
 }
 
 model Survey{
@@ -32,7 +43,6 @@ model Survey{
 enum QuestionType {
   INPUT
   MCQ
-  RATING
   TF
 }
 
