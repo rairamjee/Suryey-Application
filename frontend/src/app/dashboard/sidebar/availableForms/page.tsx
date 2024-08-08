@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/accordion";
 
 interface Form {
-    id: string;
+    id: number;
     name: string;
     description: string;
     startDate: string;  // Date in ISO 8601 format
@@ -59,8 +59,8 @@ function AvailableForms() {
         return currentDate >= startDate && currentDate <= endDate;
     });
 
-    const handleFormClick = (formId: string) => {
-        router.push(`/api/survey/${formId}`);
+    const handleFormClick = (formId: number) => {
+        router.push(`/dashboard/sidebar/response/${formId}`);
     };
 
     return (
@@ -71,7 +71,7 @@ function AvailableForms() {
                     filteredForms.map((form) => (
                         <AccordionItem
                             key={form.id}
-                            value={form.id}
+                            value={form.id.toString()} // Ensures key is a string
                             className="hover:bg-slate-200 bg-slate-950 hover:text-slate-950 text-white px-8 rounded-md mb-2"
                         >
                             <AccordionTrigger>{form.name}</AccordionTrigger>

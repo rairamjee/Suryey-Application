@@ -20,8 +20,10 @@ export async function POST(req: Request) {
         data: {...body, endDate}
     })
 
+    console.log(survey);
+
     return Response.json({
         message: "Create surveys successfully!",
-        data: survey
+        data: survey.surveyId
     })
 }

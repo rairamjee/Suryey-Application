@@ -5,7 +5,7 @@ import AllForms from './allForm/page'; // Adjusted path if needed
 import CreateForm from './createForms/page'; // Adjusted path if needed
 import AvailableForms from './availableForms/page'; // Adjusted path if needed
 import Filledforms from './filledForm/page'; // Adjusted path if needed
-import RespondForm from './response/page';
+import RespondForm from './response/[id]/page';
 import {
     Tooltip,
     TooltipContent,
@@ -15,7 +15,7 @@ import {
 
 function Sidebar() {
     // Assume this role is fetched or passed as a prop
-    const [role, setRole] = useState<'admin' | 'user'>('admin'); // Change this to 'user' for normal users
+    const [role, setRole] = useState<'admin' | 'user'>('user'); // Change this to 'user' for normal users
     const [activeView, setActiveView] = useState<'all' | 'create' | 'available' | 'filled'>('all');
 
     const today = new Date();

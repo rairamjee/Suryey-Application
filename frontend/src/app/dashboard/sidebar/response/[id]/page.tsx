@@ -21,7 +21,7 @@ interface Question {
 type QuestionType = 'TrueFalse' | 'Input' | 'MCQ';
 
 interface Survey {
-    id: string;
+    id: number;
     name: string;
     description: string;
     questions: Question[];
@@ -29,14 +29,10 @@ interface Survey {
 
 function SurveyPage() {
     const searchParams = useSearchParams();
-    const getQueryParam = (key: string): string | null => {
-        return searchParams.get(key);
-    };
-
-
-    const surveyId = getQueryParam('surveyId');
-    console.log(surveyId)
-
+    
+    // Convert query parameter to number
+    // const surveyId = Number(searchParams.get('surveyId'));
+    const surveyId = Number(1);
 
     const [survey, setSurvey] = useState<Survey | null>(null);
     const [responses, setResponses] = useState<any>({});
@@ -46,8 +42,8 @@ function SurveyPage() {
 
     useEffect(() => {
         // Ensure surveyId is defined before making the API request
-        if (!surveyId) return;
-
+        if (isNaN(surveyId)) return;
+        console.log(surveyId);
         const fetchSurvey = async () => {
             try {
                 const response = await axios.get(`/api/survey/${surveyId}`);
@@ -70,8 +66,8 @@ function SurveyPage() {
     };
 
     const handleSubmit = async () => {
-        if (!surveyId) {
-            setError("Survey ID is missing.");
+        if (isNaN(surveyId)) {
+            setError("Survey ID is missing or invalid.");
             return;
         }
 

@@ -45,9 +45,9 @@ model Survey {
 }
 
 enum QuestionType {
-  INPUT
+  Input
   MCQ
-  TF
+  TrueFalse
 }
 
 model Question {

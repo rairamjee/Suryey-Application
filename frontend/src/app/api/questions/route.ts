@@ -2,16 +2,18 @@ import prisma from "@/utils/db";
 
 export async function POST(req: Request) {
     const body = await req.json();
+    console.log(body)
     const question = await prisma.question.create({
         data: body
-    })
+    });
+
 
     return Response.json({
         message: "Questions created!",
         data: question
     }, {
         status: 200
-    })
+    });
 
 }
 
@@ -24,7 +26,7 @@ export async function GET(req: Request) {
         data: questions
     }, {
         status: 200
-    })
+    });
 }
 
 
