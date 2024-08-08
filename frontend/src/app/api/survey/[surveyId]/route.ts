@@ -1,28 +1,60 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import prisma from "@/utils/db";
 
-// Define the handler function with the correct types
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-    const { id } = req.query; // Extract the dynamic 'id' from the query parameters
+export async function GET(
+  request: Request,
+  { params }: { params: { surveyId: string } }
+) {
+ const surveyId: number = parseInt(params.surveyId as string);
+  //   console.log(searchParams.get("surveyId"));
+  //   return Response.json({ message: "ok" })
+  try {
+    console.log(surveyId)
+    const questiosSurvey = await prisma.question.findMany({where:{surveyId}});
 
-    // TypeScript ensures `id` is correctly typed. It is of type `string | string[] | undefined`.
-    // Assuming you expect `id` to be a string:
-    if (typeof id !== 'string') {
-        res.status(400).json({ error: 'Invalid ID' });
-        return;
-    }
+    console.log(questiosSurvey);
 
-    switch (req.method) {
-        case 'GET':
-            // Handle GET request
-            res.status(200).json({ message: `GET request for ID: ${id}` });
-            break;
-        case 'POST':
-            // Handle POST request
-            res.status(200).json({ message: `POST request for ID: ${id}` });
-            break;
-        // Add more cases for PUT, DELETE, etc.
-        default:
-            res.setHeader('Allow', ['GET', 'POST']);
-            res.status(405).end(`Method ${req.method} Not Allowed`);
-    }
+    return Response.json(
+      {
+        message: "Set of Questions of Survey",
+        data: questiosSurvey,
+      },
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } catch (error) {
+    console.error(error);
+
+    return Response.json(
+      { message: "Error fetching data" },
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  }
+
+  //   const { surveyId } = await req.json();
+
+  //   const surveyExist = await prisma.survey.findUnique({
+  //     where: { surveyId },
+  //   });
+
+  //   if (!surveyExist) {
+  //     return Response.json(
+  //       {
+  //         message: "Survey Not Found",
+  //         data: null,
+  //       },
+  //       {
+  //         status: 404,
+  //       }
+  //     );
+  //   }
+
+  //   Response.json({
+  //     message: "Survey Found",
+  //     data: {
+  //       id: surveyId,
+  //       name: surveyExist.surveyName,
+  //     },
+  //   });
 }

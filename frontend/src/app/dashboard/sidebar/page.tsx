@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CirclePlus, ClipboardList, FileText, CheckCircle } from 'lucide-react';
 import AllForms from './allForm/page'; // Adjusted path if needed
 import CreateForm from './createForms/page'; // Adjusted path if needed
@@ -12,19 +12,18 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { format } from 'date-fns';
 
 function Sidebar() {
     // Assume this role is fetched or passed as a prop
-    const [role, setRole] = useState<'admin' | 'user'>('user'); // Change this to 'user' for normal users
+    const [role, setRole] = useState<'admin' | 'user'>('admin'); // Change this to 'user' for normal users
     const [activeView, setActiveView] = useState<'all' | 'create' | 'available' | 'filled'>('all');
-
-    const today = new Date();
-    const formattedDate = today.toLocaleDateString(undefined, {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        weekday: 'long'
-    });
+    const [formattedDate, setFormattedDate] = useState<string>('');
+    useEffect(() => {
+        const today = new Date();
+        const formatted = format(today, "EEEE, MMMM d, yyyy");
+        setFormattedDate(formatted);
+    }, []);
 
     return (
         <div className="flex p-8 bg-slate-100 min-h-screen">
