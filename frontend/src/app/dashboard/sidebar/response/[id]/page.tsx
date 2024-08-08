@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -28,11 +28,15 @@ interface Survey {
 }
 
 function SurveyPage() {
-    const searchParams = useSearchParams();
-    
+    const router = useRouter();
+    // const { query } = router;
+
+    const {id} = useParams();
+    console.log(id);
+    const  surveyId=id;
+
     // Convert query parameter to number
-    // const surveyId = Number(searchParams.get('surveyId'));
-    const surveyId = Number(1);
+    // const surveyId = Number(query.surveyId);
 
     const [survey, setSurvey] = useState<Survey | null>(null);
     const [responses, setResponses] = useState<any>({});
@@ -41,12 +45,14 @@ function SurveyPage() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     useEffect(() => {
-        // Ensure surveyId is defined before making the API request
-        if (isNaN(surveyId)) return;
-        console.log(surveyId);
+        // Ensure surveyId is defined and valid before making the API request
+        if (!surveyId)
+            return;
+
         const fetchSurvey = async () => {
             try {
-                const response = await axios.get(`/api/survey/${surveyId}`);
+                console.log()
+                const response = await axios.get(`/api/survey/content/${id}`);
                 setSurvey(response.data);
                 setLoading(false);
             } catch (err) {
@@ -66,10 +72,10 @@ function SurveyPage() {
     };
 
     const handleSubmit = async () => {
-        if (isNaN(surveyId)) {
-            setError("Survey ID is missing or invalid.");
-            return;
-        }
+        // if (isNaN(surveyId)) {
+        //     setError("Survey ID is missing or invalid.");
+        //     return;
+        // }
 
         try {
             await axios.post(`/api/survey/${surveyId}/response`, { responses });
