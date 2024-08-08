@@ -65,7 +65,7 @@ function AvailableForms() {
 
     return (
         <div className="w-5/6">
-            <h1 className="my-12 text-xl font-semibold">List of the Forms Created</h1>
+            <h1 className="my-12 text-xl font-semibold">List of the Forms Available</h1>
             <Accordion type="single" collapsible className="w-3/4">
                 {filteredForms.length > 0 ? (
                     filteredForms.map((form) => (

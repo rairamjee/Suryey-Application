@@ -18,7 +18,7 @@ export async function GET(
         message: "Set of Questions of Survey",
         data: questiosSurvey,
       },
-      { status: 200, headers: { "Content-Type": "application/json" } }
+      { status: 200 }
     );
   } catch (error) {
     console.error(error);

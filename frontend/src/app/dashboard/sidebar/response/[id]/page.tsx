@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 import axios from 'axios';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useRouter } from 'next/navigation';
 import {
     Dialog,
     DialogContent,
@@ -20,16 +21,17 @@ interface Question {
 
 type QuestionType = 'TrueFalse' | 'Input' | 'MCQ';
 
-interface Survey {
-    id: number;
-    name: string;
-    description: string;
-    questions: Question[];
-}
+// interface Survey {
+//     id: number;
+//     name: string;
+//     description: string;
+//     questions: Question[];
+// }
 
 function SurveyPage() {
     const { id } = useParams();
     const surveyId = Number(id);
+    const router=useRouter();
 
     const [survey, setSurvey] = useState<any | null>(null);
     const [responses, setResponses] = useState<any>({});
@@ -88,7 +90,7 @@ function SurveyPage() {
     // if (loading) return <p>Loading...</p>;
     // if (error) return <p className="text-red-500">{error}</p>;
 
-    console.log("sjdslfjslf", survey?.questions)
+    // console.log("sjdslfjslf", survey?.questions)
     return (
         <div className="p-8">
 
@@ -97,12 +99,12 @@ function SurveyPage() {
             {/* <h1 className="text-2xl font-semibold">{survey?.name}</h1> */}
             {/* <p className="text-lg mb-4">{survey?.description}</p> */}
             
-            {/* <div>
-                {survey?.questions && survey.questions.length > 0 ? (
-                    survey.questions.map((question, index) => (
-                        <div key={index} className="mb-6">
-                            <p className="font-bold">{index + 1}. {question.text}</p>
-                            {question.type === 'Input' && (
+            <div>
+                {survey ? (
+                    survey.map((question:any,index:any) => (
+                        <div key={question.questionId} className="mb-6">
+                            <p className="font-bold">{index + 1}. {question.questionName}</p>
+                            {question.questionType === 'Input' && (
                                 <Input
                                     type="text"
                                     value={responses[index] || ""}
@@ -111,7 +113,7 @@ function SurveyPage() {
                                     className="mt-2"
                                 />
                             )}
-                            {question.type === 'TrueFalse' && (
+                            {question.questionType === 'TrueFalse' && (
                                 <div className="mt-2">
                                     <Button
                                         onClick={() => handleInputChange(index, 'True')}
@@ -127,9 +129,9 @@ function SurveyPage() {
                                     </Button>
                                 </div>
                             )}
-                            {question.type === 'MCQ' && (
+                            {question.questionType === 'MCQ' && (
                                 <div className="mt-2">
-                                    {question.options?.map((option, i) => (
+                                    {question.questionOption?.map((option:any, i:any) => (
                                         <div key={i}>
                                             <input
                                                 type="radio"
@@ -149,10 +151,12 @@ function SurveyPage() {
                 ) : (
                     <p>No questions available.</p>
                 )}
-            </div> */}
+            </div>
 
             <Button onClick={() => setIsDialogOpen(true)} className="mt-8">Submit Survey</Button>
 
+            <br/>
+            <Button className='mt-12' onClick={()=>{router.push('/dashboard/sidebar')}}>Back</Button>
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogContent>
                     <DialogHeader>
