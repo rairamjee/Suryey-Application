@@ -16,7 +16,7 @@ import { format } from 'date-fns';
 
 function Sidebar() {
     // Assume this role is fetched or passed as a prop
-    const [role, setRole] = useState<'admin' | 'user'>('admin'); // Change this to 'user' for normal users
+    const [role, setRole] = useState<'admin' | 'user'>('user'); // Change this to 'user' for normal users
     const [activeView, setActiveView] = useState<'all' | 'create' | 'available' | 'filled'>('all');
     const [formattedDate, setFormattedDate] = useState<string>('');
     useEffect(() => {

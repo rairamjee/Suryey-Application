@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import axios from 'axios';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -28,32 +28,27 @@ interface Survey {
 }
 
 function SurveyPage() {
-    const router = useRouter();
-    // const { query } = router;
+    const { id } = useParams();
+    const surveyId = Number(id);
 
-    const {id} = useParams();
-    console.log(id);
-    const  surveyId=id;
-
-    // Convert query parameter to number
-    // const surveyId = Number(query.surveyId);
-
-    const [survey, setSurvey] = useState<Survey | null>(null);
+    const [survey, setSurvey] = useState<any | null>(null);
     const [responses, setResponses] = useState<any>({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     useEffect(() => {
-        // Ensure surveyId is defined and valid before making the API request
-        if (!surveyId)
+        if (isNaN(surveyId)) {
+            setError("Invalid Survey ID");
+            setLoading(false);
             return;
+        }
 
         const fetchSurvey = async () => {
             try {
-                console.log()
-                const response = await axios.get(`/api/survey/content/${id}`);
-                setSurvey(response.data);
+                const response = await axios.get(`/api/survey/${surveyId}`);
+                setSurvey(response.data.data);
+                console.log(response.data.data);
                 setLoading(false);
             } catch (err) {
                 setError("Failed to fetch survey.");
@@ -62,7 +57,9 @@ function SurveyPage() {
         };
 
         fetchSurvey();
-    }, [surveyId]);
+    }, []);
+
+    console.log(survey);
 
     const handleInputChange = (questionIndex: number, value: any) => {
         setResponses((prevResponses: any) => ({
@@ -72,10 +69,10 @@ function SurveyPage() {
     };
 
     const handleSubmit = async () => {
-        // if (isNaN(surveyId)) {
-        //     setError("Survey ID is missing or invalid.");
-        //     return;
-        // }
+        if (isNaN(surveyId)) {
+            setError("Survey ID is missing or invalid.");
+            return;
+        }
 
         try {
             await axios.post(`/api/survey/${surveyId}/response`, { responses });
@@ -85,63 +82,74 @@ function SurveyPage() {
         }
     };
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p className="text-red-500">{error}</p>;
+    const newArray = survey?.map((surveyData:any) => {
+        console.log(surveyData.questionId)
+      });
+    // if (loading) return <p>Loading...</p>;
+    // if (error) return <p className="text-red-500">{error}</p>;
 
+    console.log("sjdslfjslf", survey?.questions)
     return (
         <div className="p-8">
-            <h1 className="text-2xl font-semibold">{survey?.name}</h1>
-            <p className="text-lg mb-4">{survey?.description}</p>
 
-            <div>
-                {survey?.questions.map((question, index) => (
-                    <div key={index} className="mb-6">
-                        <p className="font-bold">{index + 1}. {question.text}</p>
-                        {question.type === 'Input' && (
-                            <Input
-                                type="text"
-                                value={responses[index] || ""}
-                                onChange={(e) => handleInputChange(index, e.target.value)}
-                                placeholder="Your answer"
-                                className="mt-2"
-                            />
-                        )}
-                        {question.type === 'TrueFalse' && (
-                            <div className="mt-2">
-                                <Button
-                                    onClick={() => handleInputChange(index, 'True')}
-                                    className={`mr-2 ${responses[index] === 'True' ? 'bg-blue-500' : 'bg-gray-300'}`}
-                                >
-                                    True
-                                </Button>
-                                <Button
-                                    onClick={() => handleInputChange(index, 'False')}
-                                    className={`ml-2 ${responses[index] === 'False' ? 'bg-blue-500' : 'bg-gray-300'}`}
-                                >
-                                    False
-                                </Button>
-                            </div>
-                        )}
-                        {question.type === 'MCQ' && (
-                            <div className="mt-2">
-                                {question.options?.map((option, i) => (
-                                    <div key={i}>
-                                        <input
-                                            type="radio"
-                                            name={`question-${index}`}
-                                            value={option}
-                                            checked={responses[index] === option}
-                                            onChange={() => handleInputChange(index, option)}
-                                            className="mr-2"
-                                        />
-                                        <label>{option}</label>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                ))}
-            </div>
+
+
+            {/* <h1 className="text-2xl font-semibold">{survey?.name}</h1> */}
+            {/* <p className="text-lg mb-4">{survey?.description}</p> */}
+            
+            {/* <div>
+                {survey?.questions && survey.questions.length > 0 ? (
+                    survey.questions.map((question, index) => (
+                        <div key={index} className="mb-6">
+                            <p className="font-bold">{index + 1}. {question.text}</p>
+                            {question.type === 'Input' && (
+                                <Input
+                                    type="text"
+                                    value={responses[index] || ""}
+                                    onChange={(e) => handleInputChange(index, e.target.value)}
+                                    placeholder="Your answer"
+                                    className="mt-2"
+                                />
+                            )}
+                            {question.type === 'TrueFalse' && (
+                                <div className="mt-2">
+                                    <Button
+                                        onClick={() => handleInputChange(index, 'True')}
+                                        className={`mr-2 ${responses[index] === 'True' ? 'bg-blue-500' : 'bg-gray-300'}`}
+                                    >
+                                        True
+                                    </Button>
+                                    <Button
+                                        onClick={() => handleInputChange(index, 'False')}
+                                        className={`ml-2 ${responses[index] === 'False' ? 'bg-blue-500' : 'bg-gray-300'}`}
+                                    >
+                                        False
+                                    </Button>
+                                </div>
+                            )}
+                            {question.type === 'MCQ' && (
+                                <div className="mt-2">
+                                    {question.options?.map((option, i) => (
+                                        <div key={i}>
+                                            <input
+                                                type="radio"
+                                                name={`question-${index}`}
+                                                value={option}
+                                                checked={responses[index] === option}
+                                                onChange={() => handleInputChange(index, option)}
+                                                className="mr-2"
+                                            />
+                                            <label>{option}</label>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    ))
+                ) : (
+                    <p>No questions available.</p>
+                )}
+            </div> */}
 
             <Button onClick={() => setIsDialogOpen(true)} className="mt-8">Submit Survey</Button>
 
