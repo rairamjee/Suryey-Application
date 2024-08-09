@@ -9,7 +9,11 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
+
+//shadcn components are used 
+
 import axios from "axios";
+
 
 interface Form {
   name: string;
@@ -27,6 +31,8 @@ type QuestionType = "TrueFalse" | "Input" | "MCQ";
 
 function CreateForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  //survey
   const [surveyIdCons, setSurveyIdCons] = useState<number | null>(null);
   const [formName, setFormName] = useState("");
   const [formDescription, setFormDescription] = useState("");
@@ -51,7 +57,7 @@ function CreateForm() {
         surveyName: formName,
         surveyDescription: formDescription,
       });
-      setSurveyIdCons(data.data); // Assuming the response structure includes the survey ID
+      setSurveyIdCons(data.data); // Updating the response data
     } catch (error) {
       console.log(error);
     }
@@ -61,6 +67,8 @@ function CreateForm() {
       description: formDescription,
       questions: [],
     };
+
+
     setForms([...forms, newForm]);
 
     setFormName("");
@@ -129,7 +137,6 @@ function CreateForm() {
     }
 
     try {
-      // Assuming you have an endpoint to submit the entire form
       await axios.post('/api/submitForms', { forms });
       console.log("Forms submitted:", forms);
       setForms([]);

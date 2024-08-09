@@ -1,11 +1,12 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { CirclePlus, ClipboardList, FileText, CheckCircle } from 'lucide-react';
+import { CirclePlus, ClipboardList, FileText, CheckCircle ,LogOut } from 'lucide-react';
 import AllForms from './allForm/page'; // Adjusted path if needed
 import CreateForm from './createForms/page'; // Adjusted path if needed
 import AvailableForms from './availableForms/page'; // Adjusted path if needed
 // import Filledforms from './filledForm/page'; // Adjusted path if needed
 import RespondForm from './response/[id]/page';
+import { useRouter } from 'next/navigation';
 import {
     Tooltip,
     TooltipContent,
@@ -15,10 +16,15 @@ import {
 import { format } from 'date-fns';
 
 function Sidebar() {
-    // Assume this role is fetched or passed as a prop
-    const [role, setRole] = useState<'admin' | 'user'>('admin'); // Change this to 'user' for normal users
-    const [activeView, setActiveView] = useState<'all' | 'create' | 'available' | 'filled'>('available');
+
+    // User identification to be added
+
+    const [role, setRole] = useState<'admin' | 'user'>('user'); // Change this to 'user' for normal users
+    const [activeView, setActiveView] = useState<'all' | 'create' | 'available' | 'filled'>('available'); // Setting up the active slide
     const [formattedDate, setFormattedDate] = useState<string>('');
+    const router=useRouter();
+
+    //Date Formater 
     useEffect(() => {
         const today = new Date();
         const formatted = format(today, "EEEE, MMMM d, yyyy");
@@ -32,6 +38,9 @@ function Sidebar() {
                     <img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Logo" className="h-8 w-8" />
                     <h3 className="mt-4 text-xl">Questify!</h3>
                 </div>
+            
+            
+            {/* content load for admin and normal user */}
                 <div className="px-4 my-6">
                     {role === 'admin' ? (
                         <>
@@ -49,6 +58,13 @@ function Sidebar() {
                                 <CirclePlus className="h-4 w-4 mr-8" />
                                 <span>Create Form</span>
                             </div>
+                            <div
+                                className={`flex items-center mb-4 cursor-pointer p-2 rounded-lg hover:bg-slate-700 hover:text-slate-50 ${activeView === 'all' ? 'bg-slate-700 text-slate-50' : ''}`}
+                                onClick={() => router.push('/login')}
+                            >
+                                <LogOut className="h-4 w-4 mr-8" />
+                                <span>Log Out</span>
+                            </div>
                         </>
                     ) : (
                         <>
@@ -57,7 +73,7 @@ function Sidebar() {
                                 onClick={() => setActiveView('available')}
                             >
                                 <FileText className="h-4 w-4 mr-8" />
-                                <span>Available Forms</span>
+                                <span>Forms to Fill</span>
                             </div>
                             <div
                                 className={`flex items-center mb-4 cursor-pointer p-2 rounded-lg hover:bg-slate-700 hover:text-slate-50 ${activeView === 'filled' ? 'bg-slate-700 text-slate-50' : ''}`}
@@ -66,10 +82,20 @@ function Sidebar() {
                                 <CheckCircle className="h-4 w-4 mr-8" />
                                 <span>Filled Forms</span>
                             </div>
+                            <div
+                                className={`flex items-center mb-4 cursor-pointer p-2 rounded-lg hover:bg-slate-700 hover:text-slate-50 ${activeView === 'all' ? 'bg-slate-700 text-slate-50' : ''}`}
+                                onClick={() => router.push('/login')}
+                            >
+                                <LogOut className="h-4 w-4 mr-8" />
+                                <span>Log Out</span>
+                            </div>
                         </>
                     )}
                 </div>
             </div>
+
+            {/* setting up the active slides states */}
+
             <div className='ml-[16.6667%] w-5/6'>
                 <h1 className="h-16 text-3xl text-slate-900">
                     {role === 'admin' ? (
@@ -94,6 +120,8 @@ function Sidebar() {
                         Date: {formattedDate}
                     </div>
                 </div>
+
+                
 
                 {/* Conditional Rendering */}
                 {role === 'admin' ? (

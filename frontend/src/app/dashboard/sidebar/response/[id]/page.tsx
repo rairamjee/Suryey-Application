@@ -21,12 +21,6 @@ interface Question {
 
 type QuestionType = 'TrueFalse' | 'Input' | 'MCQ';
 
-// interface Survey {
-//     id: number;
-//     name: string;
-//     description: string;
-//     questions: Question[];
-// }
 
 function SurveyPage() {
     const { id } = useParams();
@@ -48,7 +42,7 @@ function SurveyPage() {
 
         const fetchSurvey = async () => {
             try {
-                const response = await axios.get(`/api/survey/${surveyId}`);
+                const response = await axios.get(`/api/survey/${surveyId}`); // sending the request to the backed it is a dynamic structuring 
                 setSurvey(response.data.data);
                 console.log(response.data.data);
                 setLoading(false);
@@ -76,8 +70,12 @@ function SurveyPage() {
             return;
         }
 
+
+
         try {
-            await axios.post(`/api/survey/${surveyId}/response`, { responses });
+            await axios.post(`/api/response/`, {
+                surveyId
+             });
             alert("Survey submitted successfully!");
         } catch (err) {
             setError("Failed to submit survey.");
@@ -96,8 +94,8 @@ function SurveyPage() {
 
 
 
-            {/* <h1 className="text-2xl font-semibold">{survey?.name}</h1> */}
-            {/* <p className="text-lg mb-4">{survey?.description}</p> */}
+            <h1 className="text-2xl font-semibold">{survey?.name}</h1>
+            <p className="text-lg mb-4">{survey?.description}</p>
             
             <div>
                 {survey ? (
@@ -117,13 +115,13 @@ function SurveyPage() {
                                 <div className="mt-2">
                                     <Button
                                         onClick={() => handleInputChange(index, 'True')}
-                                        className={`mr-2 ${responses[index] === 'True' ? 'bg-blue-500' : 'bg-gray-300'}`}
+                                        className={`mr-2 ${responses[index] === 'True' ? 'bg-slate-900' : 'bg-slate-400'} hover:bg-slate-600`}
                                     >
                                         True
                                     </Button>
                                     <Button
                                         onClick={() => handleInputChange(index, 'False')}
-                                        className={`ml-2 ${responses[index] === 'False' ? 'bg-blue-500' : 'bg-gray-300'}`}
+                                        className={`ml-2 ${responses[index] === 'False' ? 'bg-slate-900' : 'bg-slate-400'}  hover:bg-slate-600`}
                                     >
                                         False
                                     </Button>

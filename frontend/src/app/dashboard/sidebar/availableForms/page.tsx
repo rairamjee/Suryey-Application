@@ -23,6 +23,8 @@ function AvailableForms() {
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
 
+
+    // Fetching the data from the api '/api/survey'
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -51,6 +53,9 @@ function AvailableForms() {
     if (error) return <p className="text-red-500">{error}</p>;
 
     const currentDate = new Date();
+
+
+    // checking which are active forms using the filter option 
 
     const filteredForms = allForms.filter(form => {
         const startDate = new Date(form.startDate);

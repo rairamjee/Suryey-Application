@@ -8,12 +8,14 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
+//Interface is used here to define the structure and the type of the variables
 interface Form {
-    id: string; // Changed to 'id' to match the response data
-    name: string; // Changed to 'name' to match the response data
-    description: string; // Changed to 'description' to match the response data
-    startDate: string; // Added to match the response data
-    endDate: string; // Added to match the response data
+    id: string; 
+    name: string; 
+    description: string; 
+    startDate: string; 
+    endDate: string; 
 }
 
 function Allforms() {
@@ -25,8 +27,7 @@ function Allforms() {
         const fetchData = async () => {
             try {
                 const response = await axios.get('/api/survey');
-                
-                // Transform the API response to fit the Form interface
+        
                 const forms = response.data.data.map((item: any) => ({
                     id: item.surveyId,
                     name: item.surveyName,
