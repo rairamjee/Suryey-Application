@@ -19,7 +19,7 @@ function Sidebar() {
 
     // User identification to be added
 
-    const [role, setRole] = useState<'admin' | 'user'>('user'); // Change this to 'user' for normal users
+    const [role, setRole] = useState<'admin' | 'user'>('admin'); // Change this to 'user' for normal users
     const [activeView, setActiveView] = useState<'all' | 'create' | 'available' | 'filled'>('available'); // Setting up the active slide
     const [formattedDate, setFormattedDate] = useState<string>('');
     const router=useRouter();
