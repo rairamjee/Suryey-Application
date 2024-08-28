@@ -1,0 +1,78 @@
+"questionId","questionName","questionType","questionOption","surveyId"
+1,"How often do you use our product?","MCQ","[""Daily"",""Weekly"",""Monthly"",""Rarely""]",1
+2,"Do you feel the training content was relevant?","TrueFalse","[]",3
+3,"What did you think of the new product features?","Input","[]",4
+4,"How would you rate the overall experience with our service?","MCQ","[""Excellent"",""Good"",""Average"",""Poor""]",5
+5,"What improvements would you suggest for our website?","Input","[]",7
+6,"What is your preferred method of communication?","MCQ","[""Email"",""Phone"",""Chat""]",6
+7,"Do you find our website user-friendly?","TrueFalse","[]",7
+9,"Rate the following aspects of our service.","MCQ","[""Speed"",""Quality"",""Customer Support""]",3
+8,"Please provide your feedback on our new product.","Input","[]",5
+10,"What topics should be covered in future training sessions?","Input","[]",9
+11,"Please describe any challenges you faced during the training.","Input","[]",3
+12,"Please provide any additional comments or suggestions.","Input","[]",1
+13,"What is your level of satisfaction with your job?","Input","[]",1
+14,"How would you rate our customer service?","MCQ","[""Excellent"",""Good"",""Average"",""Poor""]",2
+15,"Would you like to participate in future surveys?","TrueFalse","[]",5
+16,"Do you feel valued as an employee?","TrueFalse","[]",5
+17,"Which of the following training topics are you interested in?","MCQ","[""Leadership"",""Technical Skills"",""Soft Skills""]",1
+18,"How satisfied are you with the speed of our service?","MCQ","[""Very Satisfied"",""Satisfied"",""Neutral"",""Dissatisfied""]",4
+19,"What improvements would you like to see?","Input","[]",4
+20,"Have you experienced any issues with our product?","TrueFalse","[]",2
+21,"Would you recommend our service to others?","TrueFalse","[]",2
+22,"Do you think the training was helpful?","TrueFalse","[]",3
+23,"Which features do you like the most?","MCQ","[""Feature A"",""Feature B"",""Feature C""]",4
+24,"What are the top three features you would like to see added?","Input","[]",3
+25,"How would you rate your onboarding experience?","MCQ","[""Excellent"",""Good"",""Average"",""Poor""]",2
+26,"What additional support would you find useful?","Input","[]",5
+27,"Do you agree with the new policy changes?","TrueFalse","[]",4
+28,"How would you rate the overall quality of our product?","MCQ","[""Excellent"",""Good"",""Average"",""Poor""]",1
+29,"How often do you encounter issues with our product?","MCQ","[""Never"",""Rarely"",""Sometimes"",""Often""]",6
+30,"How would you rate the new feature update?","MCQ","[""Excellent"",""Good"",""Average"",""Poor""]",11
+31,"What additional features would you like to see in our product?","Input","[]",12
+32,"Do you find the product easy to use?","TrueFalse","[]",13
+33,"Have you experienced any bugs with the new update?","TrueFalse","[]",11
+34,"How would you rate your overall experience with our product?","MCQ","[""Excellent"",""Good"",""Average"",""Poor""]",12
+35,"How likely are you to recommend our product to a friend?","MCQ","[""Very Likely"",""Likely"",""Neutral"",""Unlikely""]",14
+36,"Rate the effectiveness of our product support.","MCQ","[""Very Effective"",""Effective"",""Neutral"",""Ineffective""]",13
+37,"Do you feel more confident in your role after the training?","TrueFalse","[]",18
+38,"What is the main reason for your rating?","Input","[]",14
+39,"Are you satisfied with the training content provided?","MCQ","[""Very Satisfied"",""Satisfied"",""Neutral"",""Dissatisfied""]",17
+40,"Have you had any issues with the product?","TrueFalse","[]",15
+41,"What improvements would you suggest for our service?","Input","[]",21
+42,"How satisfied are you with the product's performance?","MCQ","[""Very Satisfied"",""Satisfied"",""Neutral"",""Dissatisfied""]",15
+43,"What improvements would you like to see in our service?","Input","[]",16
+44,"Rate the quality of our customer service.","MCQ","[""Excellent"",""Good"",""Average"",""Poor""]",10
+45,"How would you rate the customer support service?","MCQ","[""Excellent"",""Good"",""Average"",""Poor""]",16
+46,"What additional topics should be included in future trainings?","Input","[]",17
+47,"What new features would enhance your experience with our product?","Input","[]",20
+48,"Rate the effectiveness of our customer service team.","MCQ","[""Very Effective"",""Effective"",""Neutral"",""Ineffective""]",22
+49,"Rate the quality of our customer support.","MCQ","[""Excellent"",""Good"",""Average"",""Poor""]",25
+50,"Do you find the product easy to integrate with other tools?","TrueFalse","[]",22
+51,"How would you rate the clarity of our product documentation?","MCQ","[""Excellent"",""Good"",""Average"",""Poor""]",19
+52,"Do you have any additional feedback for our service?","Input","[]",10
+53,"How effective was the training in improving your skills?","MCQ","[""Very Effective"",""Effective"",""Neutral"",""Ineffective""]",18
+54,"How satisfied are you with the support team?","MCQ","[""Very Satisfied"",""Satisfied"",""Neutral"",""Dissatisfied""]",8
+55,"Do you have any suggestions for improving the documentation?","Input","[]",19
+56,"How would you rate the product's reliability?","MCQ","[""Excellent"",""Good"",""Average"",""Poor""]",26
+57,"Rate the ease of getting started with our product.","MCQ","[""Very Easy"",""Easy"",""Neutral"",""Difficult""]",27
+58,"How likely are you to continue using our product?","MCQ","[""Very Likely"",""Likely"",""Neutral"",""Unlikely""]",20
+60,"Do you feel that our product meets your needs?","TrueFalse","[]",24
+59,"How satisfied are you with the product's performance in real-world scenarios?","MCQ","[""Very Satisfied"",""Satisfied"",""Neutral"",""Dissatisfied""]",23
+64,"Rate your overall experience with our service.","MCQ","[""Excellent"",""Good"",""Average"",""Poor""]",31
+69,"Would you use our service again?","TrueFalse","[]",8
+61,"What improvements would you suggest for our product?","Input","[]",29
+62,"How effective was our product in solving your problem?","MCQ","[""Very Effective"",""Effective"",""Neutral"",""Ineffective""]",30
+63,"Have you encountered any issues with the product?","TrueFalse","[]",26
+65,"How likely are you to use our service again?","MCQ","[""Very Likely"",""Likely"",""Neutral"",""Unlikely""]",2
+68,"What additional features would you like to see in future updates?","Input","[]",31
+66,"Do you have any suggestions for improving the product?","Input","[]",30
+67,"What additional features would you like to see?","Input","[]",23
+70,"How clear were the instructions provided during the training?","MCQ","[""Very Clear"",""Clear"",""Neutral"",""Unclear""]",9
+71,"How likely are you to recommend our product to others?","MCQ","[""Very Likely"",""Likely"",""Neutral"",""Unlikely""]",29
+72,"How do you rate the ease of use of our platform?","MCQ","[""Very Easy"",""Easy"",""Neutral"",""Difficult""]",24
+73,"What changes would you recommend for our customer support?","Input","[]",25
+74,"Do you feel the product is priced fairly?","TrueFalse","[]",28
+75,"What features do you find most valuable?","Input","[]",27
+76,"How satisfied are you with the current product updates?","MCQ","[""Very Satisfied"",""Satisfied"",""Neutral"",""Dissatisfied""]",28
+77,"How would you rate the overall performance of our service?","MCQ","[""Excellent"",""Good"",""Average"",""Poor""]",21
